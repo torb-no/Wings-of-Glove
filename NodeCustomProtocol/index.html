@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var indicator;
+	document.addEventListener('DOMContentLoaded', function() {
+		indicator = document.querySelector('.indicator');
+	})
+
+	var socket = io.connect('http://localhost:3000');
+	socket.on('toGame', function (data) {
+		var x = data.x;
+		x += 100;
+		indicator.style.left = x + "px";
+	});
+</script>
+
+<style>
+	.container {
+		width: 200px;
+		height: 20px;
+		position: relative;
+		border: 2px solid black;
+	}
+
+	.indicator {
+		width: 20px;
+		position: absolute;
+		left: 100px;
+		margin-left: -10px;
+		top: 0;
+		bottom: 0;
+		background: black;
+	}
+</style>
+
+<h1>Accelerometer</h1>
+
+<div class='container'>
+	<div class='indicator'></div>
+</div>
