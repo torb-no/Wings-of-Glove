@@ -1,13 +1,13 @@
 "use strict";
 
 var SerialPort = require("serialport").SerialPort,
-    objectConverter = require("./objectConverter");
+    objectConverter = require("./gloveObjectConverter");
 
 
 exports.glove = function() {
   var g = {};
   
-  var serialPort = new SerialPort("/dev/tty.usbserial-A800f3aE", {
+  var serialPort = new SerialPort("/dev/tty.usbmodemfa131", {
     baudrate: 19200
   });
   
@@ -15,14 +15,15 @@ exports.glove = function() {
     console.log("OBJECT RECIVER NOT SET");
   }
   
+  g.isConnected = false;
   g.connected = function(obj) {
-    console.log("GLOVE CONNECTED NOT SET");
+    g.isConnected = true;
   }
   
   g.send = function(obj) {
     var data = "s;" + objectConverter.toArduino(obj);
     writeln(data);
-    console.log("Sendt to glove: " + data);
+    // console.log("Sendt to glove: " + data);
   }
   
   function writeln(data) {
