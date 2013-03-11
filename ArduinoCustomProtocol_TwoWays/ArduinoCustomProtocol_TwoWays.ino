@@ -1,13 +1,20 @@
 #include <TinkerKit.h>
 
+int const iterationsPerSend = 8;
+
 void setup() {
 	Serial.begin(19200);
 }
 
+int iteration = 0;
 void loop() {
-	delay(50);
-	reciveData();
+	boolean tock = iteration > iterationsPerSend;
 	
-	delay(50);
-	sendData();
+	iterateRecive(tock);
+	iterateSend(tock);
+	
+	if (tock) iteration = 0;
+	else iteration++;
+	
+	delay(15);
 }

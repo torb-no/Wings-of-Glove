@@ -3,11 +3,17 @@
 var SerialPort = require("serialport").SerialPort,
     objectConverter = require("./gloveObjectConverter");
 
+var ports = {
+  air: {
+    serial: "/dev/tty.usbmodemfa131",
+    xbee: "/dev/tty.usbserial-A800f3aE"
+  }
+};
 
 exports.glove = function() {
   var g = {};
   
-  var serialPort = new SerialPort("/dev/tty.usbmodemfa131", {
+  var serialPort = new SerialPort(ports.air.xbee, {
     baudrate: 19200
   });
   

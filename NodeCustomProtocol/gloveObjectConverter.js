@@ -12,6 +12,10 @@ exports.toObject = function(rawdata) {
   
     propName = prop.substring(0,colonPos);
     val = prop.substring(colonPos+1);
+    
+    if (val === "true") val = true;
+    else if (val === "false") val = false;
+    if ( !isNaN(parseInt(val)) ) val = parseInt(val);
   
     obj[propName] = val;
   });
