@@ -12,7 +12,7 @@
 		socket = io.connect('http://localhost:3000');
 		socket.on('toGame', function (data) {
 			var x = data.x + 100,
-				y = data.y + 100;
+				y = (data.y || data.z) + 100;
 			indicator.style.left = x + "px";
 			indicator.style.top = y + "px";
 			

@@ -36,8 +36,8 @@ function getObjectForSending(obj) {
 	}
 	
 	var o = {
-		x: adjustAccelNum(obj.y, zeroPoints.y),
-		y: adjustAccelNum(obj.x, zeroPoints.x),
+		x: adjustAccelNum(obj.x, zeroPoints.x),
+		z: -adjustAccelNum(obj.y, zeroPoints.y),
 		button: obj.btn || false,
 	};
 	
@@ -45,13 +45,17 @@ function getObjectForSending(obj) {
 }
 
 var limit = 100,
+	degreeAdjust = -10; //Assumes limit is 100
 	callibrate = false;
 function adjustAccelNum(_accelNum, zeroPoint) {
 	var accelNum = _accelNum;
 	accelNum -= zeroPoint; // Accelometer goes from 0 to 1023
 	if (accelNum > limit) accelNum = limit;
 	else if (accelNum < -limit) accelNum = -limit;
-
+	
+	// Extremely primitive degrees adjust
+	accelNum += degreeAdjust;
+	
 	return -accelNum;
 }
 
